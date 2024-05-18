@@ -18,7 +18,6 @@ import imageio
 import copy
 from networks import Inpaint_Color_Net, Inpaint_Depth_Net, Inpaint_Edge_Net
 from MiDaS.run import run_depth
-from boostmonodepth_utils import run_boostmonodepth
 from MiDaS.monodepth_net import MonoDepthNet
 import MiDaS.MiDaS_utils as MiDaS_utils
 from bilateral_filtering import sparse_bilateral_filtering
@@ -50,12 +49,9 @@ for idx in tqdm(range(len(sample_list))):
     image = imageio.imread(sample['ref_img_fi'])
 
     print(f"Running depth extraction at {time.time()}")
-    if config['use_boostmonodepth'] is True:
-        run_boostmonodepth(sample['ref_img_fi'], config['src_folder'], config['depth_folder'])
-    elif config['require_midas'] is True:
+    if config['require_midas'] is True:
         run_depth([sample['ref_img_fi']], config['src_folder'], config['depth_folder'],
                   config['MiDaS_model_ckpt'], MonoDepthNet, MiDaS_utils, target_w=640)
-
     if 'npy' in config['depth_format']:
         config['output_h'], config['output_w'] = np.load(sample['depth_fi']).shape[:2]
     else:

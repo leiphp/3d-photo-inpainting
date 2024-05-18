@@ -1,85 +1,40 @@
-# [CVPR 2020] 3D Photography using Context-aware Layered Depth Inpainting
+## 2D-to-Stereoscopic
+<img src="https://github.com/Genji-MS/2D-to-Stereoscopic/blob/main/Tests/StereoOutput/Art_Alice_CrossView.png" height="350"> 
 
-[![Open 3DPhotoInpainting in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1706ToQrkIZshRSJSHvZ1RuCiM__YX3Bz)
+Based on "3d-photo-inpainting" (Reference and links at the bottom) Instead of a movie, this repo modifies a few scripts to create a side-by-side stereoscopic image. The goal is to test the ability of 2D to 3D ML techniques. 
 
-### [[Paper](https://arxiv.org/abs/2004.04727)] [[Project Website](https://shihmengli.github.io/3D-Photo-Inpainting/)] [[Google Colab](https://colab.research.google.com/drive/1706ToQrkIZshRSJSHvZ1RuCiM__YX3Bz)]
+The novelty of this idea is to bring photos to life. Stereoscopic images have been around for ages. It's only with modern technolgy can we do things with them like full color 3D movies and VR. The basis of these technologies is to allow your individual eyes to see two images of the same scene with a slight disparity between them. Your brain will interpret these two images into 3D. While the effect can be done without the aid of technology, it takes a good deal of practice to do so comfortably.
 
-<p align='center'>
-<img src='https://filebox.ece.vt.edu/~jbhuang/project/3DPhoto/3DPhoto_teaser.jpg' width='900'/>
-</p>
+I've always have been a fan and have practiced the technique over years. Given the chance to leverage Maching Learning, I wanted to see historic imagas, cartoons, or even a film converted into 3D.
 
-We propose a method for converting a single RGB-D input image into a 3D photo, i.e., a multi-layer representation for novel view synthesis that contains hallucinated color and depth structures in regions occluded in the original view. We use a Layered Depth Image with explicit pixel connectivity as underlying representation, and present a learning-based inpainting model that iteratively synthesizes new local color-and-depth content into the occluded region in a spatial context-aware manner. The resulting 3D photos can be efficiently rendered with motion parallax using standard graphics engines. We validate the effectiveness of our method on a wide range of challenging everyday scenes and show fewer artifacts when compared with the state-of-the-arts.
-<br/>
+### Exploring the models and data
+The technology has come a long way, the work I am basing my research on does a great job at filling in image data. To explain futher...
+  - <a href="https://github.com/Genji-MS/2D-to-Stereoscopic/blob/main/EXPLORINGDATA.md">EXPLORINGDATA.md</a>
 
-**3D Photography using Context-aware Layered Depth Inpainting**
-<br/>
-[Meng-Li Shih](https://shihmengli.github.io/), 
-[Shih-Yang Su](https://lemonatsu.github.io/), 
-[Johannes Kopf](https://johanneskopf.de/), and
-[Jia-Bin Huang](https://filebox.ece.vt.edu/~jbhuang/)
-<br/>
-In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2020.
+### Tests: Producing generated 3D images from naturally created 3D images
+To test how good the technology is, I took a series of stereoscopic images, cropped them in half, then generated a 3D image from that. Comparing the original images with the generated ones we can see what does, and doesn't work well.
+  - <a href="https://github.com/Genji-MS/2D-to-Stereoscopic/blob/main/TESTS.md">TESTS.md</a>
 
+### Parameter Tuning: Trying to get higher quality 3D
+We attempt to modify some settings to see if they would produce better results
+  - <a href="https://github.com/Genji-MS/2D-to-Stereoscopic/blob/main/DOCUMENTATION.md">DOCUMENTATION.md</a>
+  - <a href="https://github.com/Genji-MS/2D-to-Stereoscopic/blob/main/HYPERPARAMTEST.md">HYPERPARAMTEST.md</a>
 
-## Prerequisites
+### Conclusions
+In conclusion. There are a few cases where images do not process well into 3D:
+  - Reflective surfaces - A depth map can create the shape of glass, but it cannot create the refraction of an image through the glass. This is also true of water.
+  - Vertical textures - Imagine a black and white shirt. If the black side of the shirt is outside of the frame, the model will generate the missing portion as a white shirt. The effect is minimal in an image. But would become more apparent in a video where objects enter/exit the scene or pass behind foreground objects.
+  - Objects of small width - The stem of an umbrella, flowers, or individual branches. Most of these objects do not generate on a depth map.
+  - Objects of similar texture. A tree, in front of a tree, in front of a tree. It becomes difficult for the network to determine the appropriate level of depth of the individual branches due to the object similarity. Trees at a distance however work well because we can observe a distinct edge of the shape.
+  - Cartoons with hard lines of contrast - The backgrounds of classic animated films were often painted, and look very good in 3D. The actual cel shaded character animation will often have minimal shadows and highlights, or have solid black outlines that can generate an incorrect depth map.
 
-- Linux (tested on Ubuntu 18.04.4 LTS)
-- Anaconda
-- Python 3.7 (tested on 3.7.4)
-- PyTorch 1.4.0 (tested on 1.4.0 for execution)
-
-and the Python dependencies listed in [requirements.txt](requirements.txt)
-- To get started, please run the following commands:
-    ```bash
-    conda create -n 3DP python=3.7 anaconda
-    conda activate 3DP
-    pip install -r requirements.txt
-    conda install pytorch==1.4.0 torchvision==0.5.0 cudatoolkit==10.1.243 -c pytorch
-    ```
-- Next, please download the model weight using the following command:
-    ```bash
-    chmod +x download.sh
-    ./download.sh
-    ```    
-
-## Quick start
-Please follow the instructions in this section. 
-This should allow to execute our results.
-For more detailed instructions, please refer to [`DOCUMENTATION.md`](DOCUMENTATION.md).
-
-## Execute
-1. Put ```.jpg``` files (e.g., test.jpg) into the ```image``` folder. 
-    - E.g., `image/moon.jpg`
-2. Run the following command
-    ```bash
-    python main.py --config argument.yml
-    ```
-    - Note: The 3D photo generation process usually takes about 2-3 minutes depending on the available computing resources.
-3. The results are stored in the following directories:
-    - Corresponding depth map estimated by [MiDaS](https://github.com/intel-isl/MiDaS.git) 
-        - E.g. ```depth/moon.npy```, ```depth/moon.png```
-        - User could edit ```depth/moon.png``` manually. 
-            - Remember to set the following two flags as listed below if user wants to use manually edited ```depth/moon.png``` as input for 3D Photo.
-                - `depth_format: '.png'`
-                - `require_midas: False`
-    - Inpainted 3D mesh (Optional: User need to switch on the flag `save_ply`)
-        - E.g. ```mesh/moon.ply```
-    - Rendered videos with zoom-in motion
-        - E.g. ```video/moon_zoom-in.mp4```
-    - Rendered videos with swing motion
-        - E.g. ```video/moon_swing.mp4```
-    - Rendered videos with circle motion
-        - E.g. ```video/moon_circle.mp4```         
-    - Rendered videos with dolly zoom-in effect
-        - E.g. ```video/moon_dolly-zoom-in.mp4```
-        - Note: We assume that the object of focus is located at the center of the image.
-4. (Optional) If you want to change the default configuration. Please read [`DOCUMENTATION.md`](DOCUMENTATION.md) and modified ```argument.yml```.
+## Demo
+Based on the original Google Colab, we can interject a couple of scripts to generate 3D Stereoscopic images.
+  - https://colab.research.google.com/drive/1ByTIIQ_dMPcaNlFFDaiuSDsQ7zO03AIo?usp=sharing
 
 
-## License
+## Original License
 This work is licensed under MIT License. See [LICENSE](LICENSE) for details. 
-
-If you find our code/models useful, please consider citing our paper:
 ```
 @inproceedings{Shih3DP20,
   author = {Shih, Meng-Li and Su, Shih-Yang and Kopf, Johannes and Huang, Jia-Bin},
@@ -88,8 +43,4 @@ If you find our code/models useful, please consider citing our paper:
   year = {2020}
 }
 ```
-
-## Acknowledgments
-- We thank Pratul Srinivasan for providing clarification of the method [Srinivasan et al. CVPR 2019](https://people.eecs.berkeley.edu/~pratul/publication/mpi_extrapolation/).
-- We thank the author of [Zhou et al. 2018](https://people.eecs.berkeley.edu/~tinghuiz/projects/mpi/), [Choi et al. 2019](https://github.com/NVlabs/extreme-view-synth/), [Mildenhall et al. 2019](https://github.com/Fyusion/LLFF), [Srinivasan et al. 2019](https://github.com/google-research/google-research/tree/ac9b04e1dbdac468fda53e798a326fe9124e49fe/mpi_extrapolation), [Wiles et al. 2020](http://www.robots.ox.ac.uk/~ow/synsin.html), [Niklaus et al. 2019](https://github.com/sniklaus/3d-ken-burns) for providing their implementations online.
-- Our code builds upon [EdgeConnect](https://github.com/knazeri/edge-connect), [MiDaS](https://github.com/intel-isl/MiDaS.git) and [pytorch-inpainting-with-partial-conv](https://github.com/naoto0804/pytorch-inpainting-with-partial-conv)
+### [[Original Paper](https://arxiv.org/abs/2004.04727)] [[Project Website](https://shihmengli.github.io/3D-Photo-Inpainting/)] [[Google Colab](https://colab.research.google.com/drive/1706ToQrkIZshRSJSHvZ1RuCiM__YX3Bz)] [[Github](https://github.com/vt-vl-lab/3d-photo-inpainting)]
