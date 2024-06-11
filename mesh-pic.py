@@ -266,7 +266,7 @@ def reassign_floating_island(mesh, info_on_pix, image, depth):
     _, label_lost_map = cv2.connectedComponents(lost_map.astype(np.uint8), connectivity=4)
     mask = np.zeros((H, W))
     mask[bord_up:bord_down, bord_left:bord_right] = 1
-    label_lost_map = (label_lost_map * mask).astype(np.int64)
+    label_lost_map = (label_lost_map * mask).astype(int)
 
     for i in range(1, label_lost_map.max()+1):
         lost_xs, lost_ys = np.where(label_lost_map == i)
@@ -2234,6 +2234,8 @@ def output_3d_photo(verts, colors, faces, Height, Width, hFov, vFov, tgt_poses, 
     for video_pose, video_traj_type in zip(videos_poses, video_traj_types):
         stereos = []
         tops = []; buttoms = []; lefts = []; rights = []
+
+        # count = 0
         for tp_id, tp in enumerate(video_pose):
             rel_pose = np.linalg.inv(np.dot(tp, np.linalg.inv(ref_pose)))
             axis, angle = transforms3d.axangles.mat2axangle(rel_pose[0:3, 0:3])
@@ -2247,6 +2249,14 @@ def output_3d_photo(verts, colors, faces, Height, Width, hFov, vFov, tgt_poses, 
                 normal_canvas.reinit_camera(fov)
             normal_canvas.view_changed()
             img = normal_canvas.render()
+
+            # AttributeError: 'numpy.ndarray' object has no attribute 'read'
+            # count +=1
+            # img_img = Image.open(img)
+            # save_image = Image.new("RGB", img_img.size)
+            # save_image.paste(img_img)
+            # save_image.save(os.path.join(output_dir, video_basename + '_' + video_traj_type + str(count) + '.png'))
+
             img = cv2.GaussianBlur(img,(int(init_factor//2 * 2 + 1), int(init_factor//2 * 2 + 1)), 0)
             img = cv2.resize(img, (int(img.shape[1] / init_factor), int(img.shape[0] / init_factor)), interpolation=cv2.INTER_AREA)
             img = img[anchor[0]:anchor[1], anchor[2]:anchor[3]]
@@ -2284,31 +2294,31 @@ def output_3d_photo(verts, colors, faces, Height, Width, hFov, vFov, tgt_poses, 
         """
         atop = 0; abuttom = img.shape[0] - img.shape[0] % 2; aleft = 0; aright = img.shape[1] - img.shape[1] % 2
         crop_stereos = []
+
         for stereo in stereos:
             crop_stereos.append((stereo[atop:abuttom, aleft:aright, :3] * 1).astype(np.uint8))
             stereos = crop_stereos
-        clip = ImageSequenceClip(stereos, fps=config['fps'])
+        # clip = ImageSequenceClip(stereos, fps=config['fps'])
         if isinstance(video_basename, list):
             video_basename = video_basename[0]
-        clip.write_videofile(os.path.join(output_dir, video_basename + '_' + video_traj_type + '.mp4'), fps=config['fps'])
+        # clip.write_videofile(os.path.join(output_dir, video_basename + '_' + video_traj_type + '.mp4'), fps=config['fps'])
 
-        #生成2d图片
         path = os.path.join(output_dir, video_basename + '_' + video_traj_type + '.png')
 
         img_left_arr, img_right_arr = stereos[0],stereos[1]
         print(img_left_arr.shape)
         y_size,x_size,_ = img_left_arr.shape
-
+    
         #width of image * 2 + 30 pixels for 10 pixel padding around images (default is black)
         #height of image +20 for 10 pixel padding
         stereo_file = Image.new("RGB", (x_size*2+30,y_size+20))
         img_left = Image.fromarray(img_left_arr)
         # +10 additional pixels for the left border
-        stereo_file.paste(img_left,(10,10))
+        stereo_file.paste(img_left,(10,10)) 
         img_right = Image.fromarray(img_right_arr)
         # +10 additional pixel between images
         # +10 initial border, +10 more, +1 to avoid image overlap = +21
-        stereo_file.paste(img_right,(x_size+21,10))
+        stereo_file.paste(img_right,(x_size+21,10)) 
         stereo_file.save(path)
 
     return normal_canvas, all_canvas

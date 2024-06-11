@@ -24,7 +24,6 @@ from mesh_tools import refresh_bord_depth, enlarge_border, fill_dummy_bord, extr
 import transforms3d
 import random
 from functools import reduce
-from PIL import Image
 
 def create_mesh(depth, image, int_mtx, config):
     H, W, C = image.shape
@@ -2292,23 +2291,6 @@ def output_3d_photo(verts, colors, faces, Height, Width, hFov, vFov, tgt_poses, 
             video_basename = video_basename[0]
         clip.write_videofile(os.path.join(output_dir, video_basename + '_' + video_traj_type + '.mp4'), fps=config['fps'])
 
-        #生成2d图片
-        path = os.path.join(output_dir, video_basename + '_' + video_traj_type + '.png')
 
-        img_left_arr, img_right_arr = stereos[0],stereos[1]
-        print(img_left_arr.shape)
-        y_size,x_size,_ = img_left_arr.shape
-
-        #width of image * 2 + 30 pixels for 10 pixel padding around images (default is black)
-        #height of image +20 for 10 pixel padding
-        stereo_file = Image.new("RGB", (x_size*2+30,y_size+20))
-        img_left = Image.fromarray(img_left_arr)
-        # +10 additional pixels for the left border
-        stereo_file.paste(img_left,(10,10))
-        img_right = Image.fromarray(img_right_arr)
-        # +10 additional pixel between images
-        # +10 initial border, +10 more, +1 to avoid image overlap = +21
-        stereo_file.paste(img_right,(x_size+21,10))
-        stereo_file.save(path)
 
     return normal_canvas, all_canvas

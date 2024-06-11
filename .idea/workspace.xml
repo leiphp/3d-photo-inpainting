@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ce654007-a6ae-472b-ad7e-4f9366e8526f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DOCUMENTATION.md" beforeDir="false" afterPath="$PROJECT_DIR$/DOCUMENTATION.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MiDaS/MiDaS_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/MiDaS/MiDaS_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MiDaS/monodepth_net.py" beforeDir="false" afterPath="$PROJECT_DIR$/MiDaS/monodepth_net.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MiDaS/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/MiDaS/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/argument.yml" beforeDir="false" afterPath="$PROJECT_DIR$/argument.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bilateral_filtering.py" beforeDir="false" afterPath="$PROJECT_DIR$/bilateral_filtering.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boostmonodepth_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/boostmonodepth_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/download.sh" beforeDir="false" afterPath="$PROJECT_DIR$/download.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image/moon.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mesh.py" beforeDir="false" afterPath="$PROJECT_DIR$/mesh.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mesh_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/mesh_tools.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/networks.py" beforeDir="false" afterPath="$PROJECT_DIR$/networks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video/moon_circle.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/video/moon_dolly-zoom-in.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/video/moon_swing.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/video/moon_zoom-in.mp4" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GOROOT" path="D:/software/Go" />
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="2d-stereoscopic" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2gceaQhLCfekxyM8kPjJba7qiZ9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="694" y="318" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1718092548347">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="694" y="318" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1718092548347" />
+    <state x="-8" y="-8" width="1736" height="848" maximized="true" key="DiffContextDialog" timestamp="1716368195436">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="-8" y="-8" width="1736" height="848" maximized="true" key="DiffContextDialog/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1716368195436" />
+    <state x="740" y="271" key="FileChooserDialogImpl" timestamp="1716003912674">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="740" y="271" key="FileChooserDialogImpl/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1716003912674" />
+    <state x="92" y="92" width="1736" height="848" key="com.intellij.dvcs.ui.CompareBranchesDialog" timestamp="1716368195436">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="92" y="92" width="1736" height="848" key="com.intellij.dvcs.ui.CompareBranchesDialog/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1716368195436" />
+    <state x="636" y="249" width="647" height="534" key="find.popup" timestamp="1716001442613">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="636" y="249" width="647" height="534" key="find.popup/0.0.1920.1032/-1920.0.1920.1032@0.0.1920.1032" timestamp="1716001442613" />
+  </component>
+</project>

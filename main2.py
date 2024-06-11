@@ -10,7 +10,6 @@ import yaml
 import time
 import sys
 from mesh import write_ply, read_ply, output_3d_photo
-from common import get_image_filename, video_to_images, create_subfolder, merge_frames_and_save, merge_frames,process_image_in_directory
 from utils import get_MiDaS_samples, read_MiDaS_depth
 import torch
 import cv2
@@ -23,12 +22,6 @@ from boostmonodepth_utils import run_boostmonodepth
 from MiDaS.monodepth_net import MonoDepthNet
 import MiDaS.MiDaS_utils as MiDaS_utils
 from bilateral_filtering import sparse_bilateral_filtering
-
-# 目录路径
-directory = "/home/ubuntu/3d-photo-2d/image"
-# 处理目录中的图片
-process_image_in_directory(directory)
-
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--config', type=str, default='argument.yml',help='Configure of post processing')
@@ -146,29 +139,3 @@ for idx in tqdm(range(len(sample_list))):
                         image.copy(), copy.deepcopy(sample['int_mtx']), config, image,
                         videos_poses, video_basename, config.get('original_h'), config.get('original_w'), border=border, depth=depth, normal_canvas=normal_canvas, all_canvas=all_canvas,
                         mean_loc_depth=mean_loc_depth)
-
-#创建子文件夹
-parent_folder = "/home/ubuntu/3d-photo-2d/video"  # 替换为你的父文件夹路径
-subfolder_name = "outImgs"        # 替换为你想创建的子文件夹名称
-create_subfolder(parent_folder, subfolder_name)
-
-#指定图片文件夹位置
-folder_path = "/home/ubuntu/3d-photo-2d/image"
-image_filename = get_image_filename(folder_path)
-print ("获取到的图片名称: ", image_filename)
-video_path = f"/home/ubuntu/3d-photo-2d/video/{image_filename}_circle.mp4"
-output_folder = "/home/ubuntu/3d-photo-2d/video/outImgs"
-print ("需要转图片集的视频地址: ", video_path)
-# 指定目标图片大小或像素
-target_size = (320, 480)
-
-# 调用函数进行视频转图片
-video_to_images(video_path, output_folder, target_size)
-
-# 获取左右图
-video1_path = f"/home/ubuntu/3d-photo-2d/video/{image_filename}_start.mp4"
-video2_path = f"/home/ubuntu/3d-photo-2d/video/{image_filename}_end.mp4"
-output_path = "/home/ubuntu/3d-photo-2d/video/merged_image.jpg"
-#merge_frames_and_save(video1_path, video2_path, output_path)
-print ("主函数执行完成！")
-

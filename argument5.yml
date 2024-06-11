@@ -3,11 +3,11 @@ depth_feat_model_ckpt: checkpoints/depth-model.pth
 rgb_feat_model_ckpt: checkpoints/color-model.pth
 MiDaS_model_ckpt: MiDaS/model.pt
 use_boostmonodepth: True
-fps: 24
-num_frames: 120
-x_shift_range: [0.02]
-y_shift_range: [0.02]
-z_shift_range: [0.00]
+fps: 40
+num_frames: 240
+x_shift_range: [-0.015]
+y_shift_range: [-0.015]
+z_shift_range: [-0.05]
 traj_types: ['circle']
 video_postfix: ['circle',]
 specific: ''

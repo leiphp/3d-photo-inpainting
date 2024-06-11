@@ -93,3 +93,24 @@ If you find our code/models useful, please consider citing our paper:
 - We thank Pratul Srinivasan for providing clarification of the method [Srinivasan et al. CVPR 2019](https://people.eecs.berkeley.edu/~pratul/publication/mpi_extrapolation/).
 - We thank the author of [Zhou et al. 2018](https://people.eecs.berkeley.edu/~tinghuiz/projects/mpi/), [Choi et al. 2019](https://github.com/NVlabs/extreme-view-synth/), [Mildenhall et al. 2019](https://github.com/Fyusion/LLFF), [Srinivasan et al. 2019](https://github.com/google-research/google-research/tree/ac9b04e1dbdac468fda53e798a326fe9124e49fe/mpi_extrapolation), [Wiles et al. 2020](http://www.robots.ox.ac.uk/~ow/synsin.html), [Niklaus et al. 2019](https://github.com/sniklaus/3d-ken-burns) for providing their implementations online.
 - Our code builds upon [EdgeConnect](https://github.com/knazeri/edge-connect), [MiDaS](https://github.com/intel-isl/MiDaS.git) and [pytorch-inpainting-with-partial-conv](https://github.com/naoto0804/pytorch-inpainting-with-partial-conv)
+
+
+## 文件配置说明
+重要的逻辑文件在`main.py` `mesh.py` `common.py`
+1. 第一版身材视频和左右图及图集
+```
+export PYTHONPATH=$PYTHONPATH:/home/ubuntu/.local/lib/python3.10/site-packages
+xvfb-run python main.py --config argument.yml
+
+```
+
+2. 第二版生成标准的视频
+```
+xvfb-run python main.py --config argument5.yml
+```
+
+3. 第三版生成视频和标准左右图
+```
+export QT_QPA_PLATFORM=offscreen
+xvfb-run python main.py --config argument6.yml
+```
